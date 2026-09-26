@@ -1,7 +1,8 @@
 /* SCSS-Style Architecture with CSS Custom Properties */
 :root {
-    --post-yellow: #FFCC00;
+    --post-yellow: #ffcc00;
     --post-yellow-hover: #e6b800;
+    --post-yellow-light: #fff0b1;
     --post-dark: #222222;
     --post-dark-hover: #333333;
     --post-red: #E30613;
@@ -39,7 +40,7 @@ body {
 }
 
 header.post-header {
-    background-color: var(--post-yellow);
+    background: linear-gradient(to right, var(--post-yellow), var(--post-yellow-light));
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
@@ -61,14 +62,16 @@ header.post-header {
             gap: 12px;
 
             .logo-icon {
-                background-color: var(--post-dark);
                 color: var(--post-yellow);
-                padding: 10px;
                 border-radius: var(--radius-md);
                 font-size: 1.5rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                img {
+                    max-height: 30px;
+                }
             }
 
             .logo-text {
@@ -411,7 +414,6 @@ main.main-content {
     .map-canvas {
         position: relative;
         width: 100%;
-        height: 160px;
         background-color: #f7fafc;
         border: 1px solid #cbd5e0;
         border-radius: var(--radius-md);
@@ -672,6 +674,15 @@ main.main-content {
         }
     }
 }
+
+img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-md);
+
+}
+
+
 
 footer.post-footer {
     background-color: var(--post-dark);
