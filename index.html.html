@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postbotin Express - Geburtstags-Sendungsverfolgung</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.scss">
+</head>
+
+<body>
+
+    <header class="post-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>POSTBOTIN<span>EXPRESS</span></h1>
+                    <p>Exklusive Töchterle-Zustellung</p>
+                </div>
+            </div>
+
+            <!-- Code Search Bar -->
+            <div class="search-box">
+                <input type="text" id="trackingInput" placeholder="Code z.B. MAMA oder GUTSCHEIN">
+                <button onclick="checkCustomCode()" title="Code prüfen">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <!-- Top Status Card -->
+        <section class="card status-card">
+            <div class="status-header">
+                <div class="tracking-info">
+                    <span>Sendungsnummer</span>
+                    <div class="number-row">
+                        <h2>MAMA-58-BDAY-2026</h2>
+                        <button class="copy-btn" onclick="copyTrackingNumber()" title="Nummer kopieren">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="status-badge">
+                    <span class="dot"></span>
+                    <span>In Express-Zustellung</span>
+                </div>
+            </div>
+
+            <div class="recipient-box">
+                <div class="recipient-icon">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <div class="recipient-details">
+                    <h3>Empfängerin: Die liebste Mama der Welt (58)</h3>
+                    <p>Zustellerin: Deine persönliche Lieblings-Postbotin 🚚💨</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">
+                <span class="icon-badge"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                <span>Sendungsverlauf</span>
+            </div>
+
+            <div class="timeline-container">
+                <!-- Step 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker completed">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timestamp">Heute, 08:00 Uhr</span>
+                        <div class="title">Im Herzen der Tochter verpackt</div>
+                        <div class="description">Paket mit 100% Liebe, Dankbarkeit und Geburtstagswünschen vorbereitet.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker completed">
+                        <i class="fa-solid fa-truck-loading"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timestamp">Heute, 10:30 Uhr</span>
+                        <div class="title">Von der besten Postbotin geladen</div>
+                        <div class="description">Sorgfältig ins persönliche Zustellfahrzeug verladen. Vorsicht:
+                            Zerbrechliches Glücksgut!</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 (Active) -->
+                <div class="timeline-item">
+                    <div class="timeline-marker active">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="badge-now">Aktueller Status</span>
+                        <div class="title active-title">In Zustellung zum Kaffeetrinken</div>
+                        <div class="description">Das Zustellfahrzeug nähert sich. Bitte Kaffeemaschine vorwärmen und
+                            Halteverbot freihalten!</div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="timeline-item pending-item">
+                    <div class="timeline-marker pending">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timestamp">Geplant</span>
+                        <div class="title">Übergabe, Drücker &amp; Kuchenessen</div>
+                        <div class="description">Persönliche Übergabe durch die Tochter inklusive Stück Kuchen und
+                            Drücker.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card map-card">
+            <div class="map-header">
+                <div class="card-title" style="margin-bottom:0;">
+                    <span class="icon-badge"><i class="fa-solid fa-map-location-dot"></i></span>
+                    <span>Live-Paketradar</span>
+                </div>
+                <span class="gps-tag">GPS: Aktiv</span>
+            </div>
+
+            <div class="map-canvas">
+                <div class="map-grid"></div>
+                <div class="road"></div>
+
+                <!-- Destination -->
+                <div class="destination-house">
+                    <div class="house-icon">
+                        <i class="fa-solid fa-house-chimney"></i>
+                    </div>
+                    <span>Mamas Zuhause</span>
+                </div>
+
+                <!-- Animated Van -->
+                <div class="delivery-van">
+                    <div class="van-badge">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <span>POST</span>
+                    </div>
+                </div>
+            </div>
+            <div class="map-footer">
+                <i class="fa-solid fa-circle-info"></i>
+                Deine Postbotin nähert sich mit Lichtgeschwindigkeit!
+            </div>
+        </section>
+
+        <section class="card options-card">
+            <div class="card-title">
+                <span class="icon-badge"><i class="fa-solid fa-sliders"></i></span>
+                <span>Wunsch-Zustelloptionen anpassen</span>
+            </div>
+            <p class="options-intro">Wähle aus, wie deine Postbotin das Geburtstagspaket zustellen soll:</p>
+
+            <form class="options-form" onsubmit="saveDeliveryOptions(event)">
+                <label class="option-item">
+                    <input type="checkbox" checked>
+                    <div class="option-text">
+                        <span class="title">Direkt ins Wohnzimmer bringen</span>
+                        <span class="sub">Das Paket wird sanft auf deinem Lieblingsplatz auf dem Sofa abgelegt.</span>
+                    </div>
+                </label>
+
+                <label class="option-item">
+                    <input type="checkbox" checked>
+                    <div class="option-text">
+                        <span class="title">Mit Drücker quittieren</span>
+                        <span class="sub">Porto wird in Form einer dicken Geburtstags-Umarmung beglichen.</span>
+                    </div>
+                </label>
+
+                <label class="option-item">
+                    <input type="checkbox" checked>
+                    <div class="option-text">
+                        <span class="title">Kaffee &amp; Kuchen bereitstellen</span>
+                        <span class="sub">Die Postbotin legt eine kleine Verpflegungspause bei dir ein.</span>
+                    </div>
+                </label>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Zustellanweisungen speichern</span>
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <div id="customModal" class="modal-backdrop">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalIcon" class="modal-icon">
+                <i class="fa-solid fa-heart-circle-check"></i>
+            </div>
+            <h3 id="modalTitle" class="modal-title"></h3>
+            <div id="modalBody" class="modal-body"></div>
+            <button class="modal-action-btn" onclick="closeModal()">Super, verstanden! ❤️</button>
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="footer-content">
+            <p class="copyright">© 2026 Postbotin Express – Offizieller Geburtstags-Kurierdienst</p>
+            <p class="love-note">Gemacht mit ❤️ von deiner Tochter für die beste Mama der Welt!</p>
+        </div>
+    </footer>
+
+    <script>
+        // Copy Tracking Code to Clipboard
+        function copyTrackingNumber() {
+            const trackingNum = "MAMA-58-BDAY-2026";
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.value = trackingNum;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            showModal(
+                '<i class="fa-solid fa-copy" style="color: var(--post-dark);"></i>',
+                'Nummer kopiert!',
+                `Die Sendungsnummer <b>${trackingNum}</b> wurde in deine Zwischenablage kopiert.`
+            );
+        }
+
+        // Save Options & Trigger Confetti
+        function saveDeliveryOptions(event) {
+            event.preventDefault();
+
+            // Trigger Confetti Explosion
+            confetti({
+                particleCount: 120,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            showModal(
+                '<i class="fa-solid fa-circle-check" style="color: #38a169;"></i>',
+                'Zustellanweisungen gespeichert!',
+                'Deine Wunsch-Optionen wurden direkt auf das Handheld-Gerät deiner Postbotin übermittelt. Sie freut sich schon riesig auf den Kaffee & Kuchen!'
+            );
+        }
+
+        // Secret Code Checker Logic
+        function checkCustomCode() {
+            const input = document.getElementById('trackingInput').value.trim().toUpperCase();
+
+            if (!input) {
+                showModal(
+                    '<i class="fa-solid fa-circle-exclamation" style="color: var(--post-yellow);"></i>',
+                    'Hinweis',
+                    'Bitte gib einen Code ein (z. B. MAMA oder GUTSCHEIN).'
+                );
+                return;
+            }
+
+            if (input === 'MAMA' || input === 'MAMA58') {
+                confetti({ particleCount: 150, spread: 80 });
+                showModal(
+                    '<i class="fa-solid fa-heart" style="color: var(--post-red);"></i>',
+                    'Alles Gute zum 58. Geburtstag!',
+                    'Danke, dass du die wundervollste Mama der Welt bist! Deine Postbotin hat heute nicht nur Pakete im Gepäck, sondern auch ganz viel Liebe für dich! 🎉🎂'
+                );
+            } else if (input === 'GUTSCHEIN' || input === 'GUTSCHEINE') {
+                confetti({ particleCount: 100, spread: 60 });
+                showModal(
+                    '<i class="fa-solid fa-ticket" style="color: var(--post-yellow);"></i>',
+                    'Gutschein-Code eingelöst!',
+                    `<div style="text-align: left; background: #fffdf0; padding: 12px; border-radius: 8px; border: 1px solid #fefcbf; font-size: 0.8rem; line-height: 1.8;">
+                        <p><b>🎟️ Gutschein 1:</b> 1x Schwere-Pakete-Trageservice bis ins Obergeschoss</p>
+                        <p><b>🎟️ Gutschein 2:</b> Retouren-Sorglos-Service (Ich nehme deine Retouren direkt mit)</p>
+                        <p><b>🎟️ Gutschein 3:</b> Gemeinsames Paket-Auspack-Event bei Kaffee & Kuchen</p>
+                     </div>`
+                );
+            } else {
+                showModal(
+                    '<i class="fa-solid fa-box-open" style="color: var(--text-muted);"></i>',
+                    'Code nicht gefunden',
+                    `Der Code <b>"${input}"</b> ist uns unbekannt. Probiere es mal mit den Geheim-Codes: <b>MAMA</b> oder <b>GUTSCHEIN</b>!`
+                );
+            }
+        }
+
+        // Modal Helpers
+        function showModal(iconHtml, title, bodyHtml) {
+            document.getElementById('modalIcon').innerHTML = iconHtml;
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalBody').innerHTML = bodyHtml;
+            document.getElementById('customModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('active');
+        }
+
+        // Welcome Confetti Shower on Page Load
+        window.onload = function () {
+            setTimeout(() => {
+                confetti({
+                    particleCount: 40,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 40,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 400);
+        };
+    </script>
+</body>
+
+</html>
