@@ -168,4 +168,36 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
         map.invalidateSize();
     }, 200);
+
+    function updatePageByTime() {
+        const now = new Date();
+        const currentHour = now.getHours(); // Stunde von 0 bis 23
+
+        // Erstmal alle zeitgesteuerten Blöcke ausblenden
+        document.getElementById('display-at-09:00').style.display = 'none';
+        document.getElementById('display-at-11:00').style.display = 'none';
+        document.getElementById('display-at-13:00').style.display = 'none';
+        document.getElementById('display-at-17:00').style.display = 'none';
+
+        // Je nach Uhrzeit Blöcke aktivieren
+        if (currentHour >= 9) {
+            document.getElementById('display-at-09:00').style.display = 'block';
+        }
+        if (currentHour >= 11) {
+            document.getElementById('display-at-11:00').style.display = 'block';
+        }
+        if (currentHour >= 13) {
+            document.getElementById('display-at-13:00').style.display = 'block';
+        }
+
+        if (currentHour >= 17) {
+            document.getElementById('display-at-17:00').style.display = 'block';
+        }
+
+        // beim Laden der Seite direkt ausführen
+        updatePageByTime();
+
+        // Alle 60 Sekunden prüfen, falls sie die Seite offen lässt
+        setInterval(updatePageByTime, 60000);
+    }
 });
