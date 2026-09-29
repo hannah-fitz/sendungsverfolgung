@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
         map.invalidateSize();
     }, 200);
 
-    function updatePageByTime() {
+    /* function updatePageByTime() {
         const now = new Date();
         const currentHour = now.getHours(); // Stunde von 0 bis 23
 
@@ -203,6 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePageByTime();
 
     // Alle 60 Sekunden prüfen, falls sie die Seite offen lässt
-    setInterval(updatePageByTime, 60000);
+    setInterval(updatePageByTime, 60000); */
 
 });
