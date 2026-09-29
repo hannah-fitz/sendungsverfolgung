@@ -193,6 +193,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentHour >= 17) {
             document.getElementById('display-at-17:00').style.display = 'block';
         }
+
+        if (currentHour >= 23) {
+            document.getElementById('display-at-23:00').style.display = 'block';
+        }
     }
 
     // beim Laden der Seite direkt ausführen
