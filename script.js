@@ -193,11 +193,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentHour >= 17) {
             document.getElementById('display-at-17:00').style.display = 'block';
         }
-
-        // beim Laden der Seite direkt ausführen
-        updatePageByTime();
-
-        // Alle 60 Sekunden prüfen, falls sie die Seite offen lässt
-        setInterval(updatePageByTime, 60000);
     }
+
+    // beim Laden der Seite direkt ausführen
+    updatePageByTime();
+
+    // Alle 60 Sekunden prüfen, falls sie die Seite offen lässt
+    setInterval(updatePageByTime, 60000);
+
 });
